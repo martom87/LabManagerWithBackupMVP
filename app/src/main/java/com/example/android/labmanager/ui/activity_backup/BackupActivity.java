@@ -1,6 +1,7 @@
 package com.example.android.labmanager.ui.activity_backup;
 
 import android.content.Intent;
+import android.content.IntentSender;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,7 +15,9 @@ import com.example.android.labmanager.R;
 import com.example.android.labmanager.adapters.BackupAdapter;
 import com.example.android.labmanager.db.LabManagerBackup;
 import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
+import com.google.android.gms.drive.DriveFile;
 import com.google.android.gms.drive.DriveId;
+import com.google.android.gms.drive.OpenFileActivityBuilder;
 
 import java.util.ArrayList;
 
@@ -72,8 +75,8 @@ public class BackupActivity extends AppCompatActivity implements BackupView {
 
         backupPresenter.attachBackupView(this);
         backupPresenter.initialize(this);
-     //   backupPresenter.showBackupFolder();
-     //   backupPresenter.populateBackupList();
+        //   backupPresenter.showBackupFolder();
+        //   backupPresenter.populateBackupList();
 
         makeBackUpListViewExpandalbe();
 
@@ -118,7 +121,7 @@ public class BackupActivity extends AppCompatActivity implements BackupView {
 
     @Override
     public void makeBackUpListViewExpandalbe() {
-           backupListView.setExpanded(true);
+        backupListView.setExpanded(true);
     }
 
 
@@ -127,10 +130,68 @@ public class BackupActivity extends AppCompatActivity implements BackupView {
         return true;
     }
 
+/*    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        backupPresenter.performOnActivityResult(resultCode, resultCode, data, this);
+
+    }*/
+
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        backupPresenter.performOnActivityResult(this);
+        switch (requestCode) {
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    backupPresenter.getBackup().start();
 
+                }
+                break;
+
+            case 2:
+                IntentSender intentPicker = backupPresenter.getIntendPicker();
+                intentPicker = null;
+
+
+                if (resultCode == RESULT_OK) {
+                    //Get the folder drive id
+                    DriveId mFolderDriveId = data.getParcelableExtra(
+                            OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);
+
+                  backupPresenter.saveBackupFolder(mFolderDriveId.encodeToString());
+
+                   backupPresenter.uploadToDrive(mFolderDriveId, this);
+                }
+                break;
+
+            // REQUEST_CODE_SELECT
+            case 3:
+                if (resultCode == RESULT_OK) {
+                    // get the selected item's ID
+                    DriveId driveId = data.getParcelableExtra(
+                            OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);
+
+                    DriveFile file = driveId.asDriveFile();
+                   backupPresenter.downloadFromDrive(file);
+
+                } else {
+                    showErrorDialog();
+                }
+                finish();
+                break;
+            // REQUEST_CODE_PICKER_FOLDER
+            case 4:
+                if (resultCode == RESULT_OK) {
+                    //Get the folder drive id
+                    DriveId mFolderDriveId = data.getParcelableExtra(
+                            OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);
+
+                    backupPresenter.saveBackupFolder(mFolderDriveId.encodeToString());
+                    // Restart activity to apply changes
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
+                }
+                break;
+        }
     }
 
 

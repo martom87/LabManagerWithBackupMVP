@@ -26,6 +26,7 @@ import com.example.android.labmanager.db.Backup;
 import com.example.android.labmanager.db.LabManagerBackup;
 import com.example.android.labmanager.di.AppComponent;
 import com.example.android.labmanager.ui.activity_menu.MenuActivity;
+import com.example.android.labmanager.ui.activity_query.QueryActivity;
 import com.example.android.labmanager.ui.activity_query.QueryView;
 import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -69,7 +70,7 @@ import static android.app.Activity.RESULT_OK;
  * Created by marcinek on 10.02.2018.
  */
 
-public class BackupPresenter  {
+public class BackupPresenter {
 
     private static final int REQUEST_CODE_PICKER = 2;
     private static final int REQUEST_CODE_PICKER_FOLDER = 4;
@@ -90,8 +91,8 @@ public class BackupPresenter  {
     String title;
     private ArrayList<LabManagerBackup> backupsArray = new ArrayList<>();
 
- //   @Nullable
- //   private WeakReference<Activity> activityRef;
+    //   @Nullable
+    //   private WeakReference<Activity> activityRef;
 
     @Inject
     public BackupPresenter() {
@@ -106,8 +107,8 @@ public class BackupPresenter  {
     }
 
 
-    void initialize(@NonNull final Activity activity) {
-    //    this.activityRef = new WeakReference<Activity>(activity);
+    void initialize(Activity activity) {
+        //    this.activityRef = new WeakReference<Activity>(activity);
 
         labManagerApp = (App) activity.getApplicationContext();
         sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
@@ -165,12 +166,12 @@ public class BackupPresenter  {
     }
 
 
-    String getBackupFolder(){
+    String getBackupFolder() {
         return backupFolder;
     }
 
-    void openFolderPicker(boolean uploadToDrive, @NonNull final Activity activity) {
-      //  this.activityRef = new WeakReference<>(activity);
+    void openFolderPicker(boolean uploadToDrive, Activity activity) {
+        //  this.activityRef = new WeakReference<>(activity);
         if (uploadToDrive) {
             // First we check if a backup folder is set
             if (TextUtils.isEmpty(backupFolder)) {
@@ -190,6 +191,7 @@ public class BackupPresenter  {
                 } catch (IntentSender.SendIntentException e) {
                     Log.e(TAG, "Unable to send intent", e);
                     backupView.showErrorDialog();
+
                 }
             } else {
                 uploadToDrive(DriveId.decodeFromString(backupFolder), activity);
@@ -298,7 +300,7 @@ public class BackupPresenter  {
                         Toast.makeText(labManagerApp, "restart", Toast.LENGTH_LONG).show();
 
                         // Reboot app
-                        Intent mStartActivity = new Intent(labManagerApp, MenuActivity.class);
+                        Intent mStartActivity = new Intent(labManagerApp, QueryActivity.class);
                         int mPendingIntentId = 123456;
                         PendingIntent mPendingIntent = PendingIntent.getActivity(labManagerApp, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
                         AlarmManager mgr = (AlarmManager) labManagerApp.getSystemService(Context.ALARM_SERVICE);
@@ -317,8 +319,8 @@ public class BackupPresenter  {
         }
     }
 
-     void uploadToDrive(DriveId mFolderDriveId, @NonNull final Activity activity) {
-      //  this.activityRef = new WeakReference<Activity>(activity);
+    void uploadToDrive(DriveId mFolderDriveId, final Activity activity) {
+        //  this.activityRef = new WeakReference<Activity>(activity);
         if (mFolderDriveId != null) {
             //Create the file on GDrive
             final DriveFolder folder = mFolderDriveId.asDriveFolder();
@@ -392,10 +394,9 @@ public class BackupPresenter  {
     }
 
 
+    void openOnDrive(DriveId driveId, final Activity activity) {
 
-     void openOnDrive(DriveId driveId, @NonNull final Activity activity) {
-
-    //    this.activityRef = new WeakReference<Activity>(activity);
+        //    this.activityRef = new WeakReference<Activity>(activity);
         driveId.asDriveFolder().getMetadata((mGoogleApiClient)).setResultCallback(
                 new ResultCallback<DriveResource.MetadataResult>() {
                     @Override
@@ -415,11 +416,9 @@ public class BackupPresenter  {
     }
 
 
-    protected void performOnActivityResult( @Nullable final Activity activity) {
-        final int requestCode = 0;
-        final int resultCode = 0;
-        final Intent data = null;
-       // this.activityRef = new WeakReference<Activity>(activity);
+  /*  void performOnActivityResult(final int requestCode, final int resultCode, final Intent data, final Activity activity) {
+
+        // this.activityRef = new WeakReference<Activity>(activity);
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK) {
@@ -471,14 +470,14 @@ public class BackupPresenter  {
                 }
                 break;
         }
-    }
+    }*/
 
-    IntentSender getIntendPicker(){
+    IntentSender getIntendPicker() {
         return intentPicker;
     }
 
-    Backup getBackup(){
-        return  backup;
+    Backup getBackup() {
+        return backup;
     }
 
 
@@ -503,7 +502,7 @@ public class BackupPresenter  {
     }
 
     public boolean onOptionsItemSelected(MenuItem item, @Nullable final Activity activity) {
-      //  this.activityRef = new WeakReference<Activity>(activity);
+        //  this.activityRef = new WeakReference<Activity>(activity);
         activity.finish();
         return true;
     }

@@ -13,8 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.android.labmanager.R;
-import com.example.android.labmanager.db.FormatDateTime;
-import com.example.android.labmanager.db.LabManagerBackup;
+import com.example.android.labmanager.utilis.FormatDateTime;
+import com.example.android.labmanager.model.LabManagerBackup;
 import com.example.android.labmanager.ui.activity_backup.BackupPresenter;
 import com.google.android.gms.drive.DriveId;
 

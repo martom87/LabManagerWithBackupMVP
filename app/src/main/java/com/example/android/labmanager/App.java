@@ -3,9 +3,9 @@ package com.example.android.labmanager;
 import android.app.Application;
 import android.support.annotation.NonNull;
 
-import com.example.android.labmanager.db.Backup;
+import com.example.android.labmanager.network.google.Backup;
 import com.example.android.labmanager.db.DataBaseRealm;
-import com.example.android.labmanager.db.GoogleDriveBackup;
+import com.example.android.labmanager.network.google.GoogleDriveBackup;
 import com.example.android.labmanager.di.AppComponent;
 import com.example.android.labmanager.di.AppModule;
 import com.example.android.labmanager.di.DaggerAppComponent;

@@ -13,22 +13,12 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.labmanager.App;
-import com.example.android.labmanager.R;
-import com.example.android.labmanager.adapters.BackupAdapter;
-import com.example.android.labmanager.db.Backup;
-import com.example.android.labmanager.db.LabManagerBackup;
-import com.example.android.labmanager.di.AppComponent;
-import com.example.android.labmanager.ui.activity_menu.MenuActivity;
+import com.example.android.labmanager.network.google.Backup;
+import com.example.android.labmanager.model.LabManagerBackup;
 import com.example.android.labmanager.ui.activity_query.QueryActivity;
-import com.example.android.labmanager.ui.activity_query.QueryView;
-import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.drive.Drive;
@@ -41,7 +31,6 @@ import com.google.android.gms.drive.DriveResource;
 import com.google.android.gms.drive.Metadata;
 import com.google.android.gms.drive.MetadataBuffer;
 import com.google.android.gms.drive.MetadataChangeSet;
-import com.google.android.gms.drive.OpenFileActivityBuilder;
 import com.google.android.gms.drive.query.Filters;
 import com.google.android.gms.drive.query.Query;
 import com.google.android.gms.drive.query.SearchableField;
@@ -56,15 +45,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Date;
 
 import javax.inject.Inject;
 
 import io.realm.Realm;
-
-import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by marcinek on 10.02.2018.

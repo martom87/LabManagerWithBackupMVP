@@ -3,7 +3,7 @@ package com.example.android.labmanager.ui.activity_query;
 import com.example.android.labmanager.R;
 import com.example.android.labmanager.model.Compound;
 import com.example.android.labmanager.model.Property;
-import com.example.android.labmanager.network.PubChemClient;
+import com.example.android.labmanager.network.pubChem.PubChemClient;
 import com.example.android.labmanager.utilis.SharedPrefStorage;
 
 import javax.inject.Inject;

@@ -1,18 +1,11 @@
 package com.example.android.labmanager.di;
 
-import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
 
-import com.example.android.labmanager.db.Backup;
 import com.example.android.labmanager.db.DataBaseRealm;
-import com.example.android.labmanager.db.GoogleDriveBackup;
 import com.example.android.labmanager.db.RealmBackupRestore;
-import com.example.android.labmanager.network.PubChemClient;
-import com.example.android.labmanager.ui.activity_backup.BackupPresenter;
+import com.example.android.labmanager.network.pubChem.PubChemClient;
 import com.example.android.labmanager.utilis.SharedPrefStorage;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import javax.inject.Singleton;
 

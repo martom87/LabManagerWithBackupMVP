@@ -4,7 +4,7 @@ package com.example.android.labmanager.ui.activity_property_card;
 import com.example.android.labmanager.R;
 import com.example.android.labmanager.db.DataBaseRealm;
 import com.example.android.labmanager.model.Property;
-import com.example.android.labmanager.network.PubChemClient;
+import com.example.android.labmanager.network.pubChem.PubChemClient;
 import com.example.android.labmanager.utilis.SharedPrefStorage;
 
 

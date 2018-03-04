@@ -5,9 +5,7 @@
     android:background="#ffffff"
     android:orientation="vertical">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -114,18 +112,24 @@
                     android:textAllCaps="true"
                     android:textStyle="bold" />
 
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
                 <com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView
 
                     android:id="@+id/activity_backup_drive_listview_restore"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:dividerHeight="10.0sp">
 
                 </com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView>
+                </ScrollView>
 
             </LinearLayout>
 
         </LinearLayout>
 
-    </ScrollView>
+
 
 </LinearLayout>

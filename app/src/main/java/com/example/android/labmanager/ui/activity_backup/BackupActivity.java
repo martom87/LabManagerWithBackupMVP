@@ -124,7 +124,7 @@ public class BackupActivity extends MenuActivity implements BackupView, MenuDraw
 
     @Override
     public void showErrorDialog() {
-        Toast.makeText(getApplicationContext(), "Failure", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Failure, Please select BackupFolder", Toast.LENGTH_SHORT).show();
     }
 
     @Override

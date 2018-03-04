@@ -7,10 +7,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.example.android.labmanager.R;
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.drive.Drive;
 
 import java.lang.ref.WeakReference;
@@ -31,7 +35,8 @@ public class GoogleDriveBackup implements Backup, GoogleApiClient.OnConnectionFa
     public void init(@NonNull final Activity activity) {
         this.activityRef = new WeakReference<>(activity);
 
-        googleApiClient = new GoogleApiClient.Builder(activity)
+
+        googleApiClient = new GoogleApiClient.Builder(activity)//.setAccountName("marcintomala87@gmail.com")//.addApi(Auth.GOOGLE_SIGN_IN_API)
                 .addApi(Drive.API)
                 .addScope(Drive.SCOPE_FILE)
                 .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
@@ -62,7 +67,6 @@ public class GoogleDriveBackup implements Backup, GoogleApiClient.OnConnectionFa
             googleApiClient.connect();
 
 
-
         } else {
             throw new IllegalStateException("You should call init before start");
         }
@@ -71,7 +75,7 @@ public class GoogleDriveBackup implements Backup, GoogleApiClient.OnConnectionFa
     @Override
     public void stop() {
         if (googleApiClient != null) {
-          //  googleApiClient.disconnect();
+            signOut();
 
         } else {
             throw new IllegalStateException("You should call init before start");
@@ -96,5 +100,17 @@ public class GoogleDriveBackup implements Backup, GoogleApiClient.OnConnectionFa
         }
     }
 
+    void signOut() {
+        if (googleApiClient != null && googleApiClient.isConnected()) {
+            googleApiClient.clearDefaultAccountAndReconnect().setResultCallback(new ResultCallback<Status>() {
 
+                @Override
+                public void onResult(Status status) {
+
+                    googleApiClient.disconnect();
+                }
+            });
+
+        }
+    }
 }

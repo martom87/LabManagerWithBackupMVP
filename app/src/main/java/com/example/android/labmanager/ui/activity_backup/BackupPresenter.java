@@ -19,6 +19,7 @@ import com.example.android.labmanager.App;
 import com.example.android.labmanager.network.google.Backup;
 import com.example.android.labmanager.model.LabManagerBackup;
 import com.example.android.labmanager.ui.activity_query.QueryActivity;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.drive.Drive;
@@ -77,6 +78,7 @@ public class BackupPresenter {
     String title;
     private ArrayList<LabManagerBackup> backupsArray = new ArrayList<>();
 
+
     //   @Nullable
     //   private WeakReference<Activity> activityRef;
 
@@ -96,14 +98,17 @@ public class BackupPresenter {
     void initialize(Activity activity) {
         //    this.activityRef = new WeakReference<Activity>(activity);
 
+       // googleApiAvailability.isGooglePlayServicesAvailable(labManagerApp);
+
         labManagerApp = (App) activity.getApplicationContext();
         sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
         realm = labManagerApp.getDBHandler().getRealm();
         backup = labManagerApp.getBackup();
         backup.init(activity);
         connectClient();
-        mGoogleApiClient = backup.getClient();
 
+        mGoogleApiClient = backup.getClient();
+        backup.checkGoogleAvalibility(activity);
         backupFolder = sharedPref.getString(BACKUP_FOLDER_KEY, "");
         showBackupFolder();
         populateBackupList();

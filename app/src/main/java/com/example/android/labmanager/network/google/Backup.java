@@ -3,7 +3,6 @@ package com.example.android.labmanager.network.google;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 /**
@@ -19,4 +18,7 @@ public interface Backup {
     void stop();
 
     GoogleApiClient getClient();
+
+    boolean checkGoogleAvalibility(Activity activity);
+
 }

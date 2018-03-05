@@ -19,6 +19,7 @@ import com.example.android.labmanager.model.LabManagerBackup;
 import com.example.android.labmanager.ui.activity_menu.MenuActivity;
 import com.example.android.labmanager.ui.activity_menu.MenuDrawer;
 import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.drive.DriveFile;
 import com.google.android.gms.drive.DriveId;
 import com.google.android.gms.drive.OpenFileActivityBuilder;
@@ -34,6 +35,8 @@ import butterknife.Optional;
 
 
 public class BackupActivity extends MenuActivity implements BackupView, MenuDrawer {
+
+
 
     @Optional
     @OnClick(R.id.activity_backup_drive_button_backup)
@@ -86,8 +89,10 @@ public class BackupActivity extends MenuActivity implements BackupView, MenuDraw
         ButterKnife.bind(this);
         ((App) getApplication()).getAppComponent().inject(this);
         setTitle();
+
         backupPresenter.attachBackupView(this);
         backupPresenter.initialize(this);
+
 
 
         makeBackUpListViewExpandalbe();

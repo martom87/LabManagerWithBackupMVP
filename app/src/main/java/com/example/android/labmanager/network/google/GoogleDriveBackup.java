@@ -7,9 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.example.android.labmanager.R;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -24,8 +21,14 @@ import java.lang.ref.WeakReference;
  */
 
 public class GoogleDriveBackup implements Backup, GoogleApiClient.OnConnectionFailedListener {
+
+    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     @Nullable
     private GoogleApiClient googleApiClient;
+
+    @Nullable
+    GoogleApiAvailability googleAPI;
+
 
     @Nullable
     private WeakReference<Activity> activityRef;
@@ -58,6 +61,23 @@ public class GoogleDriveBackup implements Backup, GoogleApiClient.OnConnectionFa
     @Override
     public GoogleApiClient getClient() {
         return googleApiClient;
+    }
+
+    @Override
+    public boolean checkGoogleAvalibility(Activity activity) {
+
+         googleAPI = GoogleApiAvailability.getInstance();
+        int result = googleAPI.isGooglePlayServicesAvailable(activity);
+        if(result != ConnectionResult.SUCCESS) {
+            if(googleAPI.isUserResolvableError(result)) {
+                googleAPI.getErrorDialog(activity, result,
+                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            }
+
+            return false;
+        }
+
+        return true;
     }
 
     @Override

@@ -4,10 +4,7 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_compoundsList"
-            android:icon="@drawable/ic_list_black_24dp"
-            android:title="Compounds List" />
+
         <item
             android:id="@+id/nav_query"
             android:icon="@drawable/ic_search_black_24dp"
@@ -16,29 +13,16 @@
             android:id="@+id/nav_queriedCompoundCard"
             android:icon="@drawable/ic_photo_black_24dp"
             android:title="Compound Card" />
-
         <item
-            android:id="@+id/nav_makebackupRealm"
-            android:icon="@drawable/ic_photo_black_24dp"
-            android:title="Make Realm Backup" />
-
-        <item
-            android:id="@+id/nav_makeRestoreRealm"
-            android:icon="@drawable/ic_photo_black_24dp"
-            android:title="Make Restore Realm" />
-        <item
-            android:id="@+id/nav_makeGoogleBackup"
-            android:icon="@drawable/ic_photo_black_24dp"
-            android:title="Google Backup" />
+            android:id="@+id/nav_compoundsList"
+            android:icon="@drawable/ic_list_black_24dp"
+            android:title="Compounds List" />
         <item
             android:id="@+id/nav_makeGoogleBackup2"
             android:icon="@drawable/ic_photo_black_24dp"
-            android:title="BackupActivity2" />
-
-
+            android:title="Compounds List Backup" />
 
     </group>
-
 
 
 </menu>

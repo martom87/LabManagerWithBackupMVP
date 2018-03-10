@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.android.labmanager.App;
 import com.example.android.labmanager.R;
-import com.example.android.labmanager.db.RealmBackupRestore;
+
 import com.example.android.labmanager.ui.activity_list.CompoundsListActivity;
 import com.example.android.labmanager.ui.activity_menu.MenuActivity;
 import com.example.android.labmanager.ui.activity_menu.MenuDrawer;
@@ -48,7 +48,7 @@ public class QueryActivity extends MenuActivity implements QueryView, MenuDrawer
 
     @Inject
     QueryPresenter queryPresenter;
-    RealmBackupRestore realmBackupRestore;
+
 
     @Optional
     @OnClick(R.id.buttonCompoundDataDownload)

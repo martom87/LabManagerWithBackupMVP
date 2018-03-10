@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.android.labmanager.R;
-import com.example.android.labmanager.db.RealmBackupRestore;
 import com.example.android.labmanager.ui.activity_backup.BackupActivity;
 import com.example.android.labmanager.ui.activity_list.CompoundsListActivity;
 import com.example.android.labmanager.ui.activity_property_card.PropertyCardActivity;
@@ -42,9 +41,6 @@ public class MenuActivity extends AppCompatActivity
 
     @BindView(R.id.textViewToolbar)
     TextView textViewToolbar;
-
-    @Inject
-    RealmBackupRestore realmBackupRestore;
 
 
     @Override
@@ -79,7 +75,7 @@ public class MenuActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
+// TODO Change icon of google drive restore
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -102,23 +98,12 @@ public class MenuActivity extends AppCompatActivity
             Intent intent = new Intent(this, BackupActivity.class);
             startActivity(intent);
             finish();
-        } else if (id == R.id.nav_makebackupRealm) {
-            realmBackupRestore.backup(this);
-        } else if (id == R.id.nav_makeRestoreRealm) {
-            realmBackupRestore.restore(this);
-            restart();
         }
-
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    void restart() {
-        Intent intent = getBaseContext().getPackageManager()
-                .getLaunchIntentForPackage(getBaseContext().getPackageName());
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-    }
+
 
 
 }

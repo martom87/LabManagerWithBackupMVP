@@ -78,10 +78,6 @@ public class BackupPresenter {
     String title;
     private ArrayList<LabManagerBackup> backupsArray = new ArrayList<>();
 
-
-    //   @Nullable
-    //   private WeakReference<Activity> activityRef;
-
     @Inject
     public BackupPresenter() {
     }
@@ -96,9 +92,7 @@ public class BackupPresenter {
 
 
     void initialize(Activity activity) {
-        //    this.activityRef = new WeakReference<Activity>(activity);
 
-       // googleApiAvailability.isGooglePlayServicesAvailable(labManagerApp);
 
         labManagerApp = (App) activity.getApplicationContext();
         sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
@@ -117,7 +111,6 @@ public class BackupPresenter {
 
 
     void showBackupFolder() {
-
         if (!("").equals(backupFolder)) {
             setBackupFolderTitle(DriveId.decodeFromString(backupFolder));
             backupView.setManageButtonVisible();
@@ -126,7 +119,6 @@ public class BackupPresenter {
 
 
     void populateBackupList() {
-
         if (!("").equals(backupFolder)) {
             getBackupsFromDrive(DriveId.decodeFromString(backupFolder).asDriveFolder());
         }
@@ -143,8 +135,6 @@ public class BackupPresenter {
                             return;
                         }
                         Metadata metadata = result.getMetadata();
-
-
                         title = metadata.getTitle();
                         backupView.showTitle(title);
                     }
@@ -156,7 +146,6 @@ public class BackupPresenter {
         return title;
     }
 
-
     String getBackupFolder() {
         return backupFolder;
     }
@@ -164,7 +153,7 @@ public class BackupPresenter {
     void openFolderPicker(boolean uploadToDrive, Activity activity) {
         //  this.activityRef = new WeakReference<>(activity);
         if (uploadToDrive) {
-            // First we check if a backup folder is set
+            // checks if a backup folder is set
             if (TextUtils.isEmpty(backupFolder)) {
                 try {
                     if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
@@ -175,7 +164,7 @@ public class BackupPresenter {
                                 intentPicker, REQUEST_CODE_PICKER, null, 0, 0, 0);
 
                     }
-                    //check client is connected
+                    //checks if client is connected
                     String a = String.valueOf(mGoogleApiClient != null);
                     String b = String.valueOf(mGoogleApiClient.isConnected());
                     Toast.makeText(labManagerApp, a + "/" + b, Toast.LENGTH_SHORT).show();
@@ -193,7 +182,7 @@ public class BackupPresenter {
                 if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
                     if (intentPicker == null)
                         intentPicker = buildIntent();
-                    //Start the picker to choose a folder
+                    //Starts the picker to choose a folder
                     activity.startIntentSenderForResult(
                             intentPicker, REQUEST_CODE_PICKER_FOLDER, null, 0, 0, 0);
                 }
@@ -257,8 +246,7 @@ public class BackupPresenter {
                             return;
                         }
 
-                        // DriveContents object contains pointers
-                        // to the actual byte stream
+                        // DriveContents object contains pointers to the actual byte stream
                         DriveContents contents = result.getDriveContents();
                         InputStream input = contents.getInputStream();
 
@@ -278,11 +266,11 @@ public class BackupPresenter {
                                     safeCloseClosable(input);
                                 }
                             } catch (Exception e) {
-                                reportToFirebase(e, "Error downloading backup from drive");
+
                                 e.printStackTrace();
                             }
                         } catch (FileNotFoundException e) {
-                            reportToFirebase(e, "Error downloading backup from drive, file not found");
+
                             e.printStackTrace();
                         } finally {
                             safeCloseClosable(input);
@@ -290,22 +278,26 @@ public class BackupPresenter {
 
                         Toast.makeText(labManagerApp, "restart", Toast.LENGTH_LONG).show();
 
-                        // Reboot app
-                        Intent mStartActivity = new Intent(labManagerApp, QueryActivity.class);
-                        int mPendingIntentId = 123456;
-                        PendingIntent mPendingIntent = PendingIntent.getActivity(labManagerApp, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
-                        AlarmManager mgr = (AlarmManager) labManagerApp.getSystemService(Context.ALARM_SERVICE);
-                        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
-                        System.exit(0);
+                        rebootTheApplication();
+
                     }
                 });
+    }
+
+    void rebootTheApplication() {
+        Intent mStartActivity = new Intent(labManagerApp, QueryActivity.class);
+        int mPendingIntentId = 123456;
+        PendingIntent mPendingIntent = PendingIntent.getActivity(labManagerApp, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager mgr = (AlarmManager) labManagerApp.getSystemService(Context.ALARM_SERVICE);
+        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+        System.exit(0);
     }
 
     private void safeCloseClosable(Closeable closeable) {
         try {
             closeable.close();
         } catch (IOException e) {
-            reportToFirebase(e, "Error downloading backup from drive, IO Exception");
+
             e.printStackTrace();
         }
     }
@@ -313,7 +305,7 @@ public class BackupPresenter {
     void uploadToDrive(DriveId mFolderDriveId, final Activity activity) {
         //  this.activityRef = new WeakReference<Activity>(activity);
         if (mFolderDriveId != null) {
-            //Create the file on GDrive
+            //Creates the file on the GoogleDrive
             final DriveFolder folder = mFolderDriveId.asDriveFolder();
             Drive.DriveApi.newDriveContents(mGoogleApiClient)
                     .setResultCallback(new ResultCallback<DriveApi.DriveContentsResult>() {
@@ -330,14 +322,13 @@ public class BackupPresenter {
                             new Thread() {
                                 @Override
                                 public void run() {
-                                    // write content to DriveContents
+                                    // writes the content to DriveContents
                                     OutputStream outputStream = driveContents.getOutputStream();
 
                                     FileInputStream inputStream = null;
                                     try {
                                         inputStream = new FileInputStream(new File(realm.getPath()));
                                     } catch (FileNotFoundException e) {
-                                        reportToFirebase(e, "Error uploading backup from drive, file not found");
                                         backupView.showErrorDialog();
                                         e.printStackTrace();
                                     }
@@ -362,7 +353,7 @@ public class BackupPresenter {
                                             .setMimeType("text/plain")
                                             .build();
 
-                                    // create a file in selected folder
+                                    // creates a file in the chosen folder
                                     folder.createFile(mGoogleApiClient, changeSet, driveContents)
                                             .setResultCallback(new ResultCallback<DriveFolder.DriveFileResult>() {
                                                 @Override
@@ -407,62 +398,6 @@ public class BackupPresenter {
     }
 
 
-  /*  void performOnActivityResult(final int requestCode, final int resultCode, final Intent data, final Activity activity) {
-
-        // this.activityRef = new WeakReference<Activity>(activity);
-        switch (requestCode) {
-            case 1:
-                if (resultCode == RESULT_OK) {
-                    backup.start();
-                }
-                break;
-            // REQUEST_CODE_PICKER
-            case 2:
-                intentPicker = null;
-
-                if (resultCode == RESULT_OK) {
-                    //Get the folder drive id
-                    DriveId mFolderDriveId = data.getParcelableExtra(
-                            OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);
-
-                    saveBackupFolder(mFolderDriveId.encodeToString());
-
-                    uploadToDrive(mFolderDriveId, activity);
-                }
-                break;
-
-            // REQUEST_CODE_SELECT
-            case 3:
-                if (resultCode == RESULT_OK) {
-                    // get the selected item's ID
-                    DriveId driveId = data.getParcelableExtra(
-                            OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);
-
-                    DriveFile file = driveId.asDriveFile();
-                    downloadFromDrive(file);
-
-                } else {
-                    backupView.showErrorDialog();
-                }
-                activity.finish();
-                break;
-            // REQUEST_CODE_PICKER_FOLDER
-            case 4:
-                if (resultCode == RESULT_OK) {
-                    //Get the folder drive id
-                    DriveId mFolderDriveId = data.getParcelableExtra(
-                            OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);
-
-                    saveBackupFolder(mFolderDriveId.encodeToString());
-                    // Restart activity to apply changes
-                    Intent intent = activity.getIntent();
-                    activity.finish();
-                    activity.startActivity(intent);
-                }
-                break;
-        }
-    }*/
-
     IntentSender getIntendPicker() {
         return intentPicker;
     }
@@ -478,11 +413,6 @@ public class BackupPresenter {
         editor.apply();
     }
 
-
-    private void reportToFirebase(Exception e, String message) {
-        //  FirebaseCrash.log(message);
-        //  FirebaseCrash.report(e);
-    }
 
     public void connectClient() {
         backup.start();

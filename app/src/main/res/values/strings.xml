@@ -1,38 +1,31 @@
 <resources>
+
+    <!--query_activity-->
     <string name="app_name">LabManager</string>
-
     <string name="errorMessage">Cid Number must be an integer bigger than 0</string>
-
     <string name="InternetConnectionFailure">WIFI Unavailable</string>
 
+    <!--compounds_card_activity-->
     <string name="compoundWasSaved">"The compound was once saved. Do you want to overwrite?"</string>
-
     <string name="compoundEdit">"The Compound was overwritten"</string>
-
-    <string name="infoNoCompound">You have not got this compound</string>
-
-    <string name="infoCompoundIsIn">The compound is in </string>
-
+    <string name="infoCompoundWasSaved">The Compound was Save to List ! </string>
     <string name="neverQueriedCompound">You haven`t downloaded any compound yet ! </string>
-
     <string name="noCompoundToDisplay">No data to display. </string>
 
-    <string name="infoCompoundWasSaved">The Compound was Save to List ! </string>
-
+    <!--compounds_list_activity-->
+    <string name="infoCompoundIsIn">The compound is in </string>
+    <string name="infoNoCompound">You have not got this compound</string>
     <string name="makeSureToRemoveCmp">"Do you really want to delete this compound?" </string>
-
     <string name="deletedCompound">"The compound was removed" </string>
 
+    <!--menu_activity-->
     <string name="title_activity_menu">MenuActivity</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
-
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
-    <string name="title_activity_backup">BackupActivity</string>
 
     <!--backup_activity-->
+    <string name="title_activity_backup">BackupActivity</string>
     <string name="activity_backup_drive_desc">Backing up your data to Google Drive allows you to restore all your readings in case you lose or change devices.</string>
     <string name="activity_backup_drive_button_backup">Backup Your Compounds List</string>
     <string name="activity_backup_drive_last">Last backup:</string>

@@ -160,11 +160,6 @@ public class BackupActivity extends MenuActivity implements BackupView, MenuDraw
         return true;
     }
 
-/*    @Override
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        backupPresenter.performOnActivityResult(resultCode, resultCode, data, this);
-
-    }*/
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {

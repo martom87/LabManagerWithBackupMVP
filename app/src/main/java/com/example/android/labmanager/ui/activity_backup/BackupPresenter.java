@@ -285,7 +285,7 @@ public class BackupPresenter {
     }
 
     void rebootTheApplication() {
-        Intent mStartActivity = new Intent(labManagerApp, QueryActivity.class);
+        Intent mStartActivity = new Intent(labManagerApp, BackupActivity.class);
         int mPendingIntentId = 123456;
         PendingIntent mPendingIntent = PendingIntent.getActivity(labManagerApp, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager mgr = (AlarmManager) labManagerApp.getSystemService(Context.ALARM_SERVICE);
@@ -364,8 +364,10 @@ public class BackupPresenter {
                                                         activity.finish();
                                                         return;
                                                     }
-                                                    backupView.showSuccessDialog();
+
                                                     activity.finish();
+                                                    rebootTheApplication();
+                                                    backupView.showSuccessDialog();
                                                 }
                                             });
                                 }

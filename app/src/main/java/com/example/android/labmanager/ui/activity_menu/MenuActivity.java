@@ -19,8 +19,6 @@ import com.example.android.labmanager.ui.activity_list.CompoundsListActivity;
 import com.example.android.labmanager.ui.activity_property_card.PropertyCardActivity;
 import com.example.android.labmanager.ui.activity_query.QueryActivity;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -75,7 +73,7 @@ public class MenuActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-// TODO Change icon of google drive restore
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -94,7 +92,7 @@ public class MenuActivity extends AppCompatActivity
             Intent intent = new Intent(this, PropertyCardActivity.class);
             startActivity(intent);
             finish();
-        } else if (id == R.id.nav_makeGoogleBackup2) {
+        } else if (id == R.id.nav_makeGoogleBackup) {
             Intent intent = new Intent(this, BackupActivity.class);
             startActivity(intent);
             finish();

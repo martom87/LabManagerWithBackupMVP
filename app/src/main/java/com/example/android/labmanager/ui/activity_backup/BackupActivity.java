@@ -36,7 +36,6 @@ import butterknife.Optional;
 
 public class BackupActivity extends MenuActivity implements BackupView, MenuDrawer {
 
-// TODO add restart when backup, change google drive update dialog
 
     @Optional
     @OnClick(R.id.activity_backup_drive_button_backup)
@@ -94,7 +93,6 @@ public class BackupActivity extends MenuActivity implements BackupView, MenuDraw
         backupPresenter.initialize(this);
 
 
-
         makeBackUpListViewExpandalbe();
 
 
@@ -134,7 +132,9 @@ public class BackupActivity extends MenuActivity implements BackupView, MenuDraw
 
     @Override
     public void setManageButtonVisible() {
+
         manageButton.setVisibility(View.VISIBLE);
+
     }
 
     @Override

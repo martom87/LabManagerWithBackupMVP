@@ -164,7 +164,7 @@ public class BackupPresenter {
                                 intentPicker, REQUEST_CODE_PICKER, null, 0, 0, 0);
 
                     }
-                    //checks if client is connected
+                    //checks if client is connected//
                     String a = String.valueOf(mGoogleApiClient != null);
                     String b = String.valueOf(mGoogleApiClient.isConnected());
                     Toast.makeText(labManagerApp, a + "/" + b, Toast.LENGTH_SHORT).show();

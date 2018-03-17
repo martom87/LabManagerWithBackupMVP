@@ -18,8 +18,8 @@
             android:icon="@drawable/ic_list_black_24dp"
             android:title="Compounds List" />
         <item
-            android:id="@+id/nav_makeGoogleBackup2"
-            android:icon="@drawable/ic_photo_black_24dp"
+            android:id="@+id/nav_makeGoogleBackup"
+            android:icon="@drawable/ic_backup_black_24dp"
             android:title="Compounds List Backup" />
 
     </group>

@@ -66,7 +66,7 @@ public class BackupAdapter extends ArrayAdapter<LabManagerBackup> {
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Show custom dialog
+                    // Shows custom dialog
                     final Dialog dialog = new Dialog(context);
                     dialog.setContentView(R.layout.dialog_backup_restore);
                     TextView createdTextView = (TextView) dialog.findViewById(R.id.dialog_backup_restore_created);

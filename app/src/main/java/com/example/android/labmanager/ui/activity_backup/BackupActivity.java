@@ -19,7 +19,6 @@ import com.example.android.labmanager.model.LabManagerBackup;
 import com.example.android.labmanager.ui.activity_menu.MenuActivity;
 import com.example.android.labmanager.ui.activity_menu.MenuDrawer;
 import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
-import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.drive.DriveFile;
 import com.google.android.gms.drive.DriveId;
 import com.google.android.gms.drive.OpenFileActivityBuilder;

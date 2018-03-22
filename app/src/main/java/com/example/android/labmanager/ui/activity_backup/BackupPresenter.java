@@ -16,10 +16,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.android.labmanager.App;
-import com.example.android.labmanager.network.google.Backup;
 import com.example.android.labmanager.model.LabManagerBackup;
-import com.example.android.labmanager.ui.activity_query.QueryActivity;
-import com.google.android.gms.common.GoogleApiAvailability;
+import com.example.android.labmanager.network.google.Backup;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.drive.Drive;
@@ -151,7 +149,6 @@ public class BackupPresenter {
     }
 
     void openFolderPicker(boolean uploadToDrive, Activity activity) {
-        //  this.activityRef = new WeakReference<>(activity);
         if (uploadToDrive) {
             // checks if a backup folder is set
             if (TextUtils.isEmpty(backupFolder)) {
@@ -303,7 +300,7 @@ public class BackupPresenter {
     }
 
     void uploadToDrive(DriveId mFolderDriveId, final Activity activity) {
-        //  this.activityRef = new WeakReference<Activity>(activity);
+
         if (mFolderDriveId != null) {
             //Creates the file on the GoogleDrive
             final DriveFolder folder = mFolderDriveId.asDriveFolder();
@@ -318,7 +315,7 @@ public class BackupPresenter {
                             }
                             final DriveContents driveContents = result.getDriveContents();
 
-                            // Perform I/O off the UI thread.
+                            // Performs I/O off the UI thread.
                             new Thread() {
                                 @Override
                                 public void run() {
@@ -380,7 +377,7 @@ public class BackupPresenter {
 
     void openOnDrive(DriveId driveId, final Activity activity) {
 
-        //    this.activityRef = new WeakReference<Activity>(activity);
+
         driveId.asDriveFolder().getMetadata((mGoogleApiClient)).setResultCallback(
                 new ResultCallback<DriveResource.MetadataResult>() {
                     @Override
@@ -425,7 +422,6 @@ public class BackupPresenter {
     }
 
     public boolean onOptionsItemSelected(MenuItem item, @Nullable final Activity activity) {
-        //  this.activityRef = new WeakReference<Activity>(activity);
         activity.finish();
         return true;
     }

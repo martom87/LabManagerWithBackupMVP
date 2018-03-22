@@ -1,11 +1,9 @@
 package com.example.android.labmanager.ui.activity_query;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +14,6 @@ import android.widget.Toast;
 
 import com.example.android.labmanager.App;
 import com.example.android.labmanager.R;
-
-import com.example.android.labmanager.ui.activity_list.CompoundsListActivity;
 import com.example.android.labmanager.ui.activity_menu.MenuActivity;
 import com.example.android.labmanager.ui.activity_menu.MenuDrawer;
 import com.example.android.labmanager.ui.activity_property_card.PropertyCardActivity;

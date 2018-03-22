@@ -108,7 +108,7 @@ public class GoogleDriveBackup implements Backup, GoogleApiClient.OnConnectionFa
 
         if (result.hasResolution() && activityRef != null && activityRef.get() != null) {
             Activity a = activityRef.get();
-            // show the localized error dialog.
+            // shows the localized error dialog.
             try {
                 result.startResolutionForResult(a, 1);
             } catch (IntentSender.SendIntentException e) {

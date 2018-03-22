@@ -19,7 +19,6 @@ import com.example.android.labmanager.ui.activity_backup.BackupPresenter;
 import com.google.android.gms.drive.DriveId;
 
 
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -31,6 +30,7 @@ public class BackupAdapter extends ArrayAdapter<LabManagerBackup> {
     private FormatDateTime formatDateTime;
 
     BackupPresenter backupPresenter;
+
     @Inject
     public BackupAdapter(Context context, int resource, List<LabManagerBackup> items, BackupPresenter backupPresenter) {
         super(context, resource, items);
@@ -40,30 +40,29 @@ public class BackupAdapter extends ArrayAdapter<LabManagerBackup> {
     }
 
 
-
     @Override
     @NonNull
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-        View v = convertView;
+        View view = convertView;
 
-        if (v == null) {
-            LayoutInflater vi;
-            vi = LayoutInflater.from(getContext());
-            v = vi.inflate(R.layout.activity_backup_drive_restore_item, parent, false);
+        if (view == null) {
+            LayoutInflater layoutInflater;
+            layoutInflater = LayoutInflater.from(getContext());
+            view = layoutInflater.inflate(R.layout.activity_backup_drive_restore_item, parent, false);
         }
 
-        LabManagerBackup p = getItem(position);
-        if (p != null) {
-            final DriveId driveId = p.getDriveId();
-            final String modified = formatDateTime.formatDate(p.getModifiedDate());
-            final String size = Formatter.formatFileSize(getContext(), p.getBackupSize());
+        LabManagerBackup labManagerBackupItem = getItem(position);
+        if (labManagerBackupItem != null) {
+            final DriveId driveId = labManagerBackupItem.getDriveId();
+            final String backupDate = formatDateTime.formatDate(labManagerBackupItem.getModifiedDate());
+            final String backupSize = Formatter.formatFileSize(getContext(), labManagerBackupItem.getBackupSize());
 
-            TextView modifiedTextView = (TextView) v.findViewById(R.id.item_history_time);
-            TextView typeTextView = (TextView) v.findViewById(R.id.item_history_type);
-            modifiedTextView.setText(modified);
-            typeTextView.setText(size);
+            TextView modifiedTextView = (TextView) view.findViewById(R.id.item_history_time);
+            TextView typeTextView = (TextView) view.findViewById(R.id.item_history_type);
+            modifiedTextView.setText(backupDate);
+            typeTextView.setText(backupSize);
 
-            v.setOnClickListener(new View.OnClickListener() {
+            view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // Shows custom dialog
@@ -74,13 +73,13 @@ public class BackupAdapter extends ArrayAdapter<LabManagerBackup> {
                     Button restoreButton = (Button) dialog.findViewById(R.id.dialog_backup_restore_button_restore);
                     Button cancelButton = (Button) dialog.findViewById(R.id.dialog_backup_restore_button_cancel);
 
-                    createdTextView.setText(modified);
-                    sizeTextView.setText(size);
+                    createdTextView.setText(backupDate);
+                    sizeTextView.setText(backupSize);
 
                     restoreButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-//
+
                             backupPresenter.downloadFromDrive(driveId.asDriveFile());
                         }
                     });
@@ -97,6 +96,7 @@ public class BackupAdapter extends ArrayAdapter<LabManagerBackup> {
             });
         }
 
-        return v;
+        return view;
     }
+
 }

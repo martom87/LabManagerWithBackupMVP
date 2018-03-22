@@ -1,16 +1,10 @@
 package com.example.android.labmanager.db;
 
-import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
-import android.support.v7.widget.LinearLayoutManager;
 
-import com.example.android.labmanager.App;
 import com.example.android.labmanager.adapters.RealmCompoundAdapter;
 import com.example.android.labmanager.adapters.RealmCompoundAdapter2;
 import com.example.android.labmanager.model.Property;
-
-import javax.inject.Inject;
 
 import io.realm.Realm;
 import io.realm.RealmResults;

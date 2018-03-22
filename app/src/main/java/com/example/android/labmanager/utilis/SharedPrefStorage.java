@@ -2,19 +2,9 @@ package com.example.android.labmanager.utilis;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Base64;
-import android.widget.ImageView;
 
-import com.example.android.labmanager.R;
 import com.example.android.labmanager.model.Property;
 import com.google.gson.Gson;
-
-import java.io.ByteArrayOutputStream;
-import java.util.concurrent.Callable;
-
-import io.reactivex.Observable;
 
 /**
  * Created by marcinek on 01.11.2017.

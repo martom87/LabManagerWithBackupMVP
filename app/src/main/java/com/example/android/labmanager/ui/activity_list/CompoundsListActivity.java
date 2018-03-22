@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,7 +19,6 @@ import com.example.android.labmanager.adapters.RecyclerItemClickListener;
 import com.example.android.labmanager.ui.activity_menu.MenuActivity;
 import com.example.android.labmanager.ui.activity_menu.MenuDrawer;
 import com.example.android.labmanager.ui.activity_property_card.PropertyCardActivity;
-import com.example.android.labmanager.ui.activity_query.QueryActivity;
 
 import javax.inject.Inject;
 

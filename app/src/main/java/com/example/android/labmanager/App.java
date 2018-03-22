@@ -32,10 +32,9 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         initRealm();
-      initDagger();
+        initDagger();
         Stetho.initializeWithDefaults(this);
         buildStethoRealm();
-        //   buildRealmInspector();
 
     }
 
@@ -43,10 +42,10 @@ public class App extends Application {
         return appComponent;
     }
 
-  private void initDagger() {
-   appComponent = DaggerAppComponent.builder()
-           .appModule(new AppModule(this))
-          .build();
+    private void initDagger() {
+        appComponent = DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .build();
     }
 
     private void initRealm() {
@@ -65,16 +64,6 @@ public class App extends Application {
                         .build());
     }
 
-    private void buildRealmInspector() {
-        RealmInspectorModulesProvider.builder(this)
-                .withFolder(getCacheDir())
-                // .withEncryptionKey("encrypted.realm", )
-                .withMetaTables()
-                .withDescendingOrder()
-                .withLimit(1000)
-                .databaseNamePattern(Pattern.compile(".+\\.realm"))
-                .build();
-    }
 
     @NonNull
     public Backup getBackup() {
@@ -86,7 +75,6 @@ public class App extends Application {
     public DataBaseRealm getDBHandler() {
         return new DataBaseRealm(getApplicationContext());
     }
-
 
 
 }

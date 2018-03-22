@@ -1,7 +1,5 @@
 package com.example.android.labmanager.ui.activity_property_card;
 
-import java.util.ArrayList;
-
 /**
  * Created by marcinek on 30.10.2017.
  */

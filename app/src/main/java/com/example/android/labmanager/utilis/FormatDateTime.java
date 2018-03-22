@@ -4,13 +4,13 @@ package com.example.android.labmanager.utilis;
 
 import android.content.Context;
 
-//import com.google.firebase.crash.FirebaseCrash;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+
 
 public class FormatDateTime {
 
@@ -21,7 +21,7 @@ public class FormatDateTime {
     }
 
     public String convertDateTime(String date) {
-        //TODO use joda.time
+
         DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         DateFormat finalDataFormat = DateFormat.getDateInstance(DateFormat.SHORT);
         DateFormat finalTimeFormat;
@@ -66,8 +66,6 @@ public class FormatDateTime {
         Date parsed = null;
         try {
             parsed = inputFormat.parse(date);
-            // Because database's average is the end of the month
-            // we need to remove 1 month from final date
             Calendar cal = Calendar.getInstance();
             cal.setTime(parsed);
             cal.add(Calendar.MONTH, -1);

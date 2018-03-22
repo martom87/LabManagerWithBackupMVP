@@ -1,7 +1,5 @@
 package com.example.android.labmanager.ui.activity_list;
 
-import com.example.android.labmanager.adapters.RealmCompoundAdapter;
-
 /**
  * Created by marcinek on 03.11.2017.
  */

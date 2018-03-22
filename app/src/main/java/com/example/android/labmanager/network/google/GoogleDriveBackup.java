@@ -39,13 +39,13 @@ public class GoogleDriveBackup implements Backup, GoogleApiClient.OnConnectionFa
         this.activityRef = new WeakReference<>(activity);
 
 
-        googleApiClient = new GoogleApiClient.Builder(activity)//.setAccountName("marcintomala87@gmail.com")//.addApi(Auth.GOOGLE_SIGN_IN_API)
+        googleApiClient = new GoogleApiClient.Builder(activity)
                 .addApi(Drive.API)
                 .addScope(Drive.SCOPE_FILE)
                 .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
                     @Override
                     public void onConnected(Bundle bundle) {
-                        // Do nothing
+
                     }
 
                     @Override
